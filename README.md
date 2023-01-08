@@ -36,7 +36,7 @@ rm -rf build/
 ### nrfjprog
 ```bash
 cd application
-docker-compose -f docker-compose.yml -f docker-compose.device.yml \
+docker compose -f docker-compose.yml -f docker-compose.device.yml \
         run nrf west flash
 ```
 
