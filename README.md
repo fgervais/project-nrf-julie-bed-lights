@@ -3,10 +3,10 @@
 ## Init
 
 ```bash
-mkdir project-nrf-princess-dress
-cd project-nrf-princess-dress
+mkdir project-nrf-julie-bed-lights
+cd project-nrf-julie-bed-lights
 docker run --rm -it -u $(id -u):$(id -g) -v $(pwd):/workdir/project nordicplayground/nrfconnect-sdk:v2.1-branch bash
-west init -m https://github.com/fgervais/project-nrf-princess-dress.git .
+west init -m https://github.com/fgervais/project-nrf-julie-bed-lights.git .
 west update
 ```
 
@@ -48,4 +48,4 @@ pyocd flash -e sector -t nrf52840 -f 4000000 build/zephyr/zephyr.hex
 
 # Hardware
 
-https://github.com/fgervais/project-nrf-princess-dress_hardware
+https://github.com/fgervais/project-nrf-julie-bed-lights_hardware
