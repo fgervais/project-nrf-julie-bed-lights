@@ -135,12 +135,7 @@
 	status = "disabled";
 };
 &i2c0 {
-	ism330dhcx_dev: ism330dhcx@6a {
-		compatible = "st,ism330dhcx";
-		reg = <0x6a>;
-		drdy-gpios =  <&gpio0 9 GPIO_ACTIVE_HIGH>;
-		int-pin = <1>;
-	};
+	status = "disabled";
 };
 &spi0 {
 	status = "disabled";
