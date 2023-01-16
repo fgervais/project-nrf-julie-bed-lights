@@ -176,7 +176,11 @@
 	status = "okay";
 	// enable-pin = <30>;
 	led-pre = <0>;
-	steps = <15>;
+	// PEC11S-9213K-S0015
+	// The spec states 15 pulses per 360° rotation.
+	// I verified it to have 30 steps per full rotation.
+	// The driver won't report the correct number of ° unless I set 60.
+	steps = <60>;
 	pinctrl-0 = <&qdec_default>;
 	pinctrl-1 = <&qdec_sleep>;
 	pinctrl-names = "default", "sleep";
