@@ -52,13 +52,13 @@ void main(void)
 	while (true) {
 		ret = sensor_sample_fetch(qdec);
 		if (ret != 0) {
-			LOG_INF("Failed to fetch sample (%d)\n", ret);
+			LOG_ERR("Failed to fetch sample (%d)\n", ret);
 			return;
 		}
 
 		ret = sensor_channel_get(qdec, SENSOR_CHAN_ROTATION, &val);
 		if (ret != 0) {
-			LOG_INF("Failed to get data (%d)\n", ret);
+			LOG_ERR("Failed to get data (%d)\n", ret);
 			return;
 		}
 
