@@ -124,6 +124,20 @@
 		};
 	};
 
+	qdec_default: qdec_default {
+		group1 {
+			psels = <NRF_PSEL(QDEC_A, 0, 23)>,
+				<NRF_PSEL(QDEC_B, 0, 19)>;
+		};
+	};
+
+	qdec_sleep: qdec_sleep {
+		group1 {
+			psels = <NRF_PSEL(QDEC_A, 0, 23)>,
+				<NRF_PSEL(QDEC_B, 0, 19)>;
+			low-power-enable;
+		};
+	};
 };
 &adc {
 	status = "disabled";
@@ -157,4 +171,13 @@
 };
 &gpio1 {
 	status = "disabled";
+};
+&qdec {
+	status = "okay";
+	// enable-pin = <30>;
+	led-pre = <0>;
+	steps = <15>;
+	pinctrl-0 = <&qdec_default>;
+	pinctrl-1 = <&qdec_sleep>;
+	pinctrl-names = "default", "sleep";
 };

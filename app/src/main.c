@@ -23,8 +23,10 @@ static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 void main(void)
 {
 	int ret;
+	struct sensor_value val;
 	
 	const struct device *const cons = DEVICE_DT_GET(DT_CHOSEN(zephyr_console));
+	const struct device *const qdec = DEVICE_DT_GET(DT_NODELABEL(qdec));
 
 
 	if (app_event_manager_init()) {
@@ -40,6 +42,29 @@ void main(void)
 	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
 		return;
+	}
+
+	if (!device_is_ready(qdec)) {
+		LOG_ERR("Qdec device is not ready\n");
+		return;
+	}
+
+	while (true) {
+		ret = sensor_sample_fetch(qdec);
+		if (ret != 0) {
+			LOG_INF("Failed to fetch sample (%d)\n", ret);
+			return;
+		}
+
+		ret = sensor_channel_get(qdec, SENSOR_CHAN_ROTATION, &val);
+		if (ret != 0) {
+			LOG_INF("Failed to get data (%d)\n", ret);
+			return;
+		}
+
+		LOG_INF("Position = %d degrees", val.val1);
+
+		k_msleep(1000);
 	}
 
 	LOG_INF("****************************************");
